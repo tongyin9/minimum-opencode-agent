@@ -17,18 +17,20 @@ The framework focuses on several practical areas:
 - **Transparent Development**: Decisions, assumptions, and progress are documented explicitly. All code and outputs are produced by scripts that write results to files. This makes the entire process auditable and reproducible. The emphasis is on delivering working code and verifiable outputs rather than lengthy explanations alone.
 
 - **Letting Errors Surface**: A deliberate choice is made to let errors occur and propagate instead of wrapping large sections of code in try/except blocks that provide fallbacks or silent recoveries. This approach is especially beneficial for research-focused projects for the following reasons:
-- Research code often explores new ideas, algorithms. Masking errors can hide important information about why something failed or produced incorrect results.
-- By seeing the actual exception or failure, developers can trace the exact point of breakdown, examine inputs and state at that moment, and address root causes directly. This mirrors the iterative, evidence-based nature of scientific inquiry.
-- It discourages "defensive" coding that assumes too much about what might go wrong.
-- In the long run, it builds more reliable code because problems are confronted by solving the root cause, rather than papered over.
+1. Research code often explores new ideas, algorithms. Masking errors can hide important information about why something failed or produced incorrect results.
+2. By seeing the actual exception or failure, developers can trace the exact point of breakdown, examine inputs and state at that moment, and address root causes directly. This mirrors the iterative, evidence-based nature of scientific inquiry.
+3. It discourages "defensive" coding that assumes too much about what might go wrong.
+4. In the long run, it builds more reliable code because problems are confronted by solving the root cause, rather than papered over.
 
-**Cross-Session Memory System**: A concise `PROJECT_PROGRESS.md` serves as the single source of truth for the current project status. Previous states are automatically preserved in `archive/project_archive_log.md`. This supports seamless handoff between sessions or contributors without losing important context. The `TROUBLESHOOTING.md` file captures knowledge about issues that have been encountered and resolved.
+**Cross-Session Memory System and Evolve**: A concise `PROJECT_PROGRESS.md` serves as the single source of truth for the current project status. Previous states are automatically preserved in `archive/project_archive_log.md`. This supports seamless handoff between sessions or contributors without losing important context. The `TROUBLESHOOTING.md` file captures knowledge about issues that have been encountered and resolved. The AI can be self-evolved by maintaining the memory of key truths, key decisions, key problem-solving. 
 
-Additional advantages include: strict adherence to making only the smallest effective changes and avoiding breakage of existing functionality ("never break userspace"). This supports safe, incremental evolution of the project. The approach relies on organized scripts (in folders such as `scripts/` or `tests/`) that generate artifacts and results as files. It requires no heavy dependencies—only plain text files and simple automation—making it well suited to research environments that value speed, reliability, and traceability.
 
 ## How to use
 
 Directly copy the AGENTS.md and coding_guide.md files to your project root folder. If needed, free to append your own project info (project introduction, structure, aim) to the AGENTS.md.
+
+## Remind
+For the long context session, LLM may forget about this guideline (like consistantly update the memory). In some long context cased, need to manually remind the AI to re-read the AGENTS.md or ask for update the memory.
 
 ## License
 

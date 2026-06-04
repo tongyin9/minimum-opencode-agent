@@ -22,7 +22,7 @@ The framework focuses on several practical areas:
 3. It discourages "defensive" coding that assumes too much about what might go wrong.
 4. In the long run, it builds more reliable code because problems are confronted by solving the root cause, rather than papered over.
 
-**Cross-Session Memory System and Evolve**: A concise `PROJECT_PROGRESS.md` serves as the single source of truth for the current project status. Previous states are automatically preserved in `archive/project_archive_log.md`. This supports seamless handoff between sessions or contributors without losing important context. The `TROUBLESHOOTING.md` file captures knowledge about issues that have been encountered and resolved. The AI can be self-evolved by maintaining the memory of key truths, key decisions, key problem-solving. 
+- **Cross-Session Memory System and Evolve**: A concise `PROJECT_PROGRESS.md` serves as the single source of truth for the current project status. Previous states are automatically preserved in `archive/project_archive_log.md`. This supports seamless handoff between sessions or contributors without losing important context. The `TROUBLESHOOTING.md` file captures knowledge about issues that have been encountered and resolved. The AI can be self-evolved by maintaining the memory of key truths, key decisions, key problem-solving. 
 
 
 ## How to use

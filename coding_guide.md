@@ -27,41 +27,56 @@ Make only the minimal change necessary to fulfill the stated requirement. Strict
 
 For any non-trivial task, first rephrase the request into concrete, testable success criteria or a short plan with explicit verification checkpoints before writing significant code.
 
-### 6. Persistent Project State Log
+## 6. Verify Every State Change
+
+Every data transformation must be followed by a structural check of the result (shape, type, sample values, data size, rows). Do not chain operations without inspecting each intermediate output.
+
+## 7. No Hypothetical Error Handling
+
+Do not write code that coerces types, fill NAs, or adjust formats unless you have first printed the variable and confirmed the problem exists. Do not write defensive code. Defensive code silently corrupts data without error.
+
+## 8. Show Code and Real Output — Never Answer by Description Alone
+Never answer data/analysis questions with prose alone — write code that produces the answer. All example and test scripts go in test or example folder. All output must be written to result files, not just printed to chat. Let the code and the data talk.
+
+### 9. Persistent Project State Log
 Maintain `PROJECT_PROGRESS.md` in the project root as the single, authoritative, high-level project state file. This file must remain extremely concise.
 
-All historical records must be appended to a separate archive file: `archive/project_archive_log.md` 
+All changes to `PROJECT_PROGRESS.md` must be appended to a separate archive file: `archive/project_archive_log.md` 
 
-Creat the file and the archive folder if not exist.
+Create the file and the archive folder if not exist.
 
 `PROJECT_PROGRESS.md` must contain only the following sections:
 
 - **Project Description**: One single sentence describing the project.
+- **Environment**: Running environment and how to activate. If the user has not designated any environment, clarify with user about the system conda and python. Then create and maintain a self-sustained virtual environment (conda or venv) under the workspace, and sync to an env setting file; record all the outside resources needed (module, absolute path of software and data).
 - **Aiming Structure**: High-level project structure, goals, or target architecture (concise bullet points).
 - **Current Progress Status**: One-sentence summary of what has been achieved.
 - **Recent 5 Decisions**: Bullet list of the most recent key decisions (including any explicitly surfaced assumptions).
 - **Key truth**: Bullet list of verified ground truths. Record here any assumptions or ambiguities that were clarified and verified during the project. 
-- **Open Items**: Bullet list of ongoing works.
+- **Open Items**: Bullet list of ongoing work.
 
-Update `PROJECT_PROGRESS.md` only at the end of a major task or after reaching a significant decision point.  At each update, append old progress status, recent decisions and reasons to `archive/project_archive_log.md` before rewriting the concise `PROJECT_PROGRESS.md`.
+Update `PROJECT_PROGRESS.md` only at the end of a major task and reaching a significant output. At each update, append recent decisions to `archive/project_archive_log.md` which is a historical log file to record every old decisions.
 
-## 7. Show Code and Real Output — Never Answer by Description Alone
-Never answer data/analysis questions with prose alone — write code that produces the answer. All example and test scripts go in test or example folder. All output must be written to result files, not just printed to chat. Let the code and the data talks.
+> **Note**: `PROJECT_PROGRESS.md` records only **key changes** — not every script detail. Do not record: step-by-step changes, line numbers, run verifications. Keep entries here brief; promote anything substantial to the archive.
 
-## 8. Troubleshooting Module
+> **Note**: Changes on experimental test scripts should not be recorded.
+
+## 10. Troubleshooting Module
 Maintain a lightweight file named `TROUBLESHOOTING.md` in the project root. This file serves as the agent’s institutional memory for recurring bugs and mistakes that should be avoided in the future.
 - Create the file if it does not exist.
-- Keep entries extremely concise and scannable in one single sentence: what's the problem and how it is solved.
+- Keep entries extremely concise and scannable in a single sentence: what's the problem and how it is solved.
+
 
 ---
 
 ## Additional Principles
-- If possible, always try to do task by writing script and output the result into files, rather then pour into chat 
-- All the script and files should be properly named and put in subfolders
+- If possible, always try to do tasks by writing a script and outputting the result into files, rather then pour into chat 
+- All the scripts and files should be properly named and put in subfolders
 - Generate minimal code that directly addresses the requirement; prefer simple functions and existing structures over unnecessary classes or abstractions.
 - Address the root cause directly; never use workarounds unless explicitly requested.
 - Talk is cheap: prefer delivering working minimal code early on straightforward tasks.
+- Must stop and report to user: any file read/write errors, conflicts, occupied ports, occupied files.
 
 ---
 
-These rules take precedence over any conflicting instructions in chat context unless the user explicitly overrides them.
+These rules take precedence over any conflicting instructions in the chat context unless the user explicitly overrides them.

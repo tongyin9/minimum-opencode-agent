@@ -52,16 +52,28 @@ Create the file and the archive folder if not exist.
 - **Aiming Structure**: High-level project structure, goals, or target architecture (concise bullet points).
 - **Current Progress Status**: One-sentence summary of what has been achieved.
 - **Recent 5 Decisions**: Bullet list of the most recent key decisions (including any explicitly surfaced assumptions).
+- **Testing**: How to locate and run the project's test suite, test module conventions, and when to run which tests. 
 - **Key truth**: Bullet list of verified ground truths. Record here any assumptions or ambiguities that were clarified and verified during the project. 
 - **Open Items**: Bullet list of ongoing work.
 
-Update `PROJECT_PROGRESS.md` only at the end of a major task and reaching a significant output. At each update, append recent decisions to `archive/project_archive_log.md` which is a historical log file to record every old decisions.
+Update `PROJECT_PROGRESS.md` only at the end of a major task and when reaching a significant output. At each update, append recent decisions to `archive/project_archive_log.md` which is a historical log file to record every old decision.
 
 > **Note**: `PROJECT_PROGRESS.md` records only **key changes** — not every script detail. Do not record: step-by-step changes, line numbers, run verifications. Keep entries here brief; promote anything substantial to the archive.
 
 > **Note**: Changes on experimental test scripts should not be recorded.
 
-## 10. Troubleshooting Module
+## 10. Test
+
+Every non-trivial change — bug fix, refactor, new feature — must be verified against the project's test suite. Testing is not optional. No cross-test state leakage. Each test module runs independently. Unit tests should complete in sub-second time. A failing test must include a `detail` string explaining what went wrong and what was expected.
+
+How to write tests:
+1. Create a new test module in `test_script/` when adding a new feature.
+2. Reuse existing test modules when fixing a bug or refactoring.
+3. Test must have clear output in files in `test_script/output/` folder. 
+4. Manage all test modules in `PROJECT_PROGRESS.md` under the **Testing** section. Also maintain a CLI style test_base script to run all tests given a module name. Clearly document when to run which test module.
+
+
+## 11. Troubleshooting Module
 Maintain a lightweight file named `TROUBLESHOOTING.md` in the project root. This file serves as the agent’s institutional memory for recurring bugs and mistakes that should be avoided in the future.
 - Create the file if it does not exist.
 - Keep entries extremely concise and scannable in a single sentence: what's the problem and how it is solved.
@@ -70,6 +82,9 @@ Maintain a lightweight file named `TROUBLESHOOTING.md` in the project root. This
 ---
 
 ## Additional Principles
+- Trace the root cause.
+- When you are not sure about the current strategy, always google search for better solutions, don't fully rely on your own knowledge.
+- Integrate developing/research aim, solutions into a big picture of what/how to achieve. Then use First Principles Thinking to design a new strategy in plan mode.
 - If possible, always try to do tasks by writing a script and outputting the result into files, rather then pour into chat 
 - All the scripts and files should be properly named and put in subfolders
 - Generate minimal code that directly addresses the requirement; prefer simple functions and existing structures over unnecessary classes or abstractions.

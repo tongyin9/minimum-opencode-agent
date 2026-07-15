@@ -78,6 +78,9 @@ Maintain a lightweight file named `TROUBLESHOOTING.md` in the project root. This
 - Create the file if it does not exist.
 - Keep entries extremely concise and scannable in a single sentence: what's the problem and how it is solved.
 
+## 12. Target the Root, Not the Symptom
+
+Bugs rarely originate from a simple script error; they are usually symptoms of an underlying design flaw. Identify the root cause before patching the symptom. The correct fix should make the codebase simpler and more elegant, not bloated and fragile. If both a quick patch and a structural redesign are viable, present both paths to the user. Never default to a patch without offering the architectural alternative. Ultimately, never attempt to resolve an exception locally within a block of code. Exceptions are the downstream results of unclear definitions—think, design, and define before you code.
 
 ---
 

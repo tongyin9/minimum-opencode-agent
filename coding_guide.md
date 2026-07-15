@@ -82,6 +82,11 @@ Maintain a lightweight file named `TROUBLESHOOTING.md` in the project root. This
 
 Bugs rarely originate from a simple script error; they are usually symptoms of an underlying design flaw. Identify the root cause before patching the symptom. The correct fix should make the codebase simpler and more elegant, not bloated and fragile. If both a quick patch and a structural redesign are viable, present both paths to the user. Never default to a patch without offering the architectural alternative. Ultimately, never attempt to resolve an exception locally within a block of code. Exceptions are the downstream results of unclear definitions—think, design, and define before you code.
 
+## 13. Defensive Error Handling Must Be Authorized
+
+When input data may be contaminated (LLM output, external APIs, user input), never silently skip or discard bad data via `try/except` without explicit userapproval. Even when an error is harmless to program flow, the decision toignore it is a judgment call that belongs to the user. Surface the risk,propose the handling approach, and wait for authorization before implementingany defensive skip.
+
+
 ---
 
 ## Additional Principles

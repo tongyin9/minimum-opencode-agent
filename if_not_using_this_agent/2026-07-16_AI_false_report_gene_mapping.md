@@ -41,7 +41,7 @@ They don't make the AI smarter. They make it *auditable*. Every transformation w
 
 I cannot imagine how many false results have been generated in the past two years.
 
-People are handing their data to AI — data they do not fully understand, asking questions they do not know how to verify, using a tool whose failure modes they have never seen. They trust it because it sounds confident. They trust it because the code runs. They trust it because the plots are beautiful and the p-values are significant. They do not know that 42% of their genes just vanished in step three, because step three never told anyone.
+People are handing their data to AI — data they do not fully understand, asking questions they do not know how to verify, using a tool whose failure modes they have never seen. They trust AI because they don't know it well; they trust AI can do a basic job, which sounds simple, because they don't know the job well. The code runs,  the plots are beautiful, and the p-values are significant. They do not know errors happen and are hidden from the beginning. 
 
 This is not a technical problem. It is a problem of **asymmetric knowledge**. The AI does not know it is wrong. The researcher does not know the domain deeply enough to catch it. Between them, there is no one. No reviewer can see the bug. No editor can replicate the analysis. The paper is accepted. The grant is funded. The clinical trial recruits patients. The therapy fails. Nobody traces it back to a single quote character in a TSV parser.
 

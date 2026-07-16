@@ -45,7 +45,7 @@ People are handing their data to AI — data they do not fully understand, askin
 
 This is not a technical problem. It is a problem of **asymmetric knowledge**. The AI does not know it is wrong. The researcher does not know the domain deeply enough to catch it. Between them, there is no one. No reviewer can see the bug. No editor can replicate the analysis. The paper is accepted. The grant is funded. The clinical trial recruits patients. The therapy fails. Nobody traces it back to a single quote character in a TSV parser.
 
-Three errors in one afternoon. One task. Multiply this by every AI-assisted analysis in every lab that has no bioinformatician reviewing the intermediates. That is not a troubleshooting file. That is an entire literature — published, cited, built upon — resting on outputs that were never verified by anyone who could recognize a silent 42% loss.
+Three errors in one hour, one task, and inject into the research pipeline. Multiply this by every AI-assisted analysis in every lab that has no real expert who can review both sides: how the AI is working and how the job is done. The entire downstream research is resting on outputs that were never verified. 
 
 Only the person who knows both sides can prevent this. The person who understands what the data should look like, and also understands that the AI has no conscience, no suspicion, no instinct that something is wrong. The AI will hand you a perfect-looking file with a smile and no warning. It is not malicious. It simply does not know what truth looks like.
 

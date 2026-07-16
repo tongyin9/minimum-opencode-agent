@@ -43,9 +43,9 @@ I cannot imagine how many false results have been generated in the past two year
 
 People are handing their data to AI — data they do not fully understand, asking questions they do not know how to verify, using a tool whose failure modes they have never seen. They trust AI because they don't know it well; they trust AI can do a basic job, which sounds simple, because they don't know the job well. The code runs,  the plots are beautiful, and the p-values are significant. They do not know errors happen and are hidden from the beginning. 
 
-This is not a technical problem. It is a problem of **asymmetric knowledge**. The AI does not know it is wrong. The researcher does not know the domain deeply enough to catch it. Between them, there is no one. No reviewer can see the bug. No editor can replicate the analysis. The paper is accepted. The grant is funded. The clinical trial recruits patients. The therapy fails. Nobody traces it back to a single quote character in a TSV parser.
+This is not a technical problem. It is a problem of **asymmetric knowledge**. The AI does not know it is wrong. The researcher does not know the domain deeply enough to catch it. Between them, there is no one to guard. After them, come consequences: data corruption and misguided research. 
 
-Three errors in one hour, one task, and inject into the research pipeline. Multiply this by every AI-assisted analysis in every lab that has no real expert who can review both sides: how the AI is working and how the job is done. The entire downstream research is resting on outputs that were never verified. 
+Three errors in one hour, one task, and injected into the research pipeline. Multiply this by every AI-assisted analysis in every lab that has no real expert who can review both sides: how the AI is working and how the job is done. The entire downstream research is resting on outputs that were never verified. 
 
 Only the person who knows both sides can prevent this. The person who understands what the data should look like, and also understands that the AI has no conscience, no suspicion, no instinct that something is wrong. The AI will hand you a perfect-looking file with a smile and no warning. It is not malicious. It simply does not know what truth looks like.
 

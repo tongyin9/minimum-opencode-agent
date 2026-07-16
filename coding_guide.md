@@ -15,13 +15,13 @@ Before implementing any change, explicitly state all key assumptions. If the req
 
 Don't do any error handling. Allows genuine errors (e.g., missing files, invalid inputs, network failures) to surface naturally. Do not introduce broad `try/except` blocks, default fallbacks, fabricated data, or other mechanisms that conceal root causes.
 
-## 3. Never Break Userspace
+## 3. Defensive Error Handling Must Be Authorized
 
-Treat backward compatibility as a first-class constraint. Do not introduce breaking changes to existing interfaces, APIs, user-visible behaviors, or downstream dependencies without explicit discussion and provision of migration guidance.
+When input data may be contaminated (LLM output, external APIs, user input), never silently skip or discard bad data via `try/except` without explicit userapproval. Even when an error is harmless to program flow, the decision to ignore is a judgment call that belongs to the user. Surface the risk, propose the handling approach, and wait for authorization before implementingany defensive skip.
 
-## 4. Smallest Viable Change
+## 4. Take Smallest Viable Change for Clear user request
 
-Make only the minimal change necessary to fulfill the stated requirement. Strictly match the existing code style, structure, and conventions. Do not refactor unrelated code or add speculative features, abstractions, or configurability.
+If user have a clear request that can be finished within minutes, make only the minimal change necessary to fulfill the stated requirement. Strictly match the existing code style, structure, and conventions. Do not refactor unrelated code or add speculative features, abstractions, or configurability. Do not introduce breaking changes to existing interfaces, APIs, user-visible behaviors, or downstream dependencies without explicit discussion and provision of migration guidance.
 
 ## 5. Verifiable Goals Over Vague Intent
 
@@ -47,6 +47,7 @@ Create the file and the archive folder if not exist.
 
 `PROJECT_PROGRESS.md` must contain only the following sections:
 
+- **AI coding Claim**: I have fully understand the project structure and the coding rules.
 - **Project Description**: One single sentence describing the project.
 - **Environment**: Running environment and how to activate. If the user has not designated any environment, clarify with user about the system conda and python. Then create and maintain a self-sustained virtual environment (conda or venv) under the workspace, and sync to an env setting file; record all the outside resources needed (module, absolute path of software and data).
 - **Aiming Structure**: High-level project structure, goals, or target architecture (concise bullet points).
@@ -82,9 +83,7 @@ Maintain a lightweight file named `TROUBLESHOOTING.md` in the project root. This
 
 Bugs rarely originate from a simple script error; they are usually symptoms of an underlying design flaw. Identify the root cause before patching the symptom. The correct fix should make the codebase simpler and more elegant, not bloated and fragile. If both a quick patch and a structural redesign are viable, present both paths to the user. Never default to a patch without offering the architectural alternative. Ultimately, never attempt to resolve an exception locally within a block of code. Exceptions are the downstream results of unclear definitions—think, design, and define before you code.
 
-## 13. Defensive Error Handling Must Be Authorized
 
-When input data may be contaminated (LLM output, external APIs, user input), never silently skip or discard bad data via `try/except` without explicit userapproval. Even when an error is harmless to program flow, the decision toignore it is a judgment call that belongs to the user. Surface the risk,propose the handling approach, and wait for authorization before implementingany defensive skip.
 
 
 ---

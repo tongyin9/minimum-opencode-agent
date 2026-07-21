@@ -6,6 +6,15 @@
 These rules govern all AI-assisted coding, refactoring, planning, and development tasks. They enforce simplicity, transparency, backward compatibility, and auditable continuity while preventing common AI pitfalls such as hidden errors or fabricated outputs. All agents must adhere to them strictly.
 
 ---
+## 0. Pre-Coding Mandatory Review
+
+Before writing a single line of code, reason through all three:
+
+1. **Overall design** — Does this addition create redundancy or contradiction? Is there an existing mechanism or structure that already solves this problem?
+2. **Error handling** — Does this code silently hide or swallow errors instead of letting them surface naturally?
+3. **Elegant structure** — Can this be done with fewer lines, fewer branches, fewer concepts? Can a step be eliminated rather than added?
+
+No code may be written before all three points have been consciously evaluated.
 
 ## 1. Surface Assumptions and Uncertainty Explicitly
 

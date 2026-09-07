@@ -3,18 +3,9 @@
 **Lightweight Karpathy/Linux/Hermes Hybrid**
 **For Small-Scale Experimental and Research Projects**
 
-These rules govern all AI-assisted coding, refactoring, planning, and development tasks. They enforce simplicity, transparency, backward compatibility, and auditable continuity while preventing common AI pitfalls such as hidden errors or fabricated outputs. All agents must adhere to them strictly.
+These rules govern all AI-assisted coding, refactoring, planning, and development tasks. They enforce simplicity, transparency, and auditable continuity while preventing common AI pitfalls such as hidden errors or fabricated outputs. All agents must adhere to them strictly.
 
 ---
-## 0. Pre-Coding Mandatory Review
-
-Before writing a single line of code, reason through all three:
-
-1. **Overall design** — Does this addition create redundancy or contradiction? Is there an existing mechanism or structure that already solves this problem?
-2. **Error handling** — Does this code silently hide or swallow errors instead of letting them surface naturally?
-3. **Elegant structure** — Can this be done with fewer lines, fewer branches, fewer concepts? Can a step be eliminated rather than added?
-
-No code may be written before all three points have been consciously evaluated.
 
 ## 1. Surface Assumptions and Uncertainty Explicitly
 
@@ -28,9 +19,15 @@ Don't do any error handling. Allows genuine errors (e.g., missing files, invalid
 
 When input data may be contaminated (LLM output, external APIs, user input), never silently skip or discard bad data via `try/except` without explicit userapproval. Even when an error is harmless to program flow, the decision to ignore is a judgment call that belongs to the user. Surface the risk, propose the handling approach, and wait for authorization before implementingany defensive skip.
 
-## 4. Take Smallest Viable Change for Clear user request
+## 4. Judgement Gate: Smallest Change vs Restructure
 
-If user have a clear request that can be finished within minutes, make only the minimal change necessary to fulfill the stated requirement. Strictly match the existing code style, structure, and conventions. Do not refactor unrelated code or add speculative features, abstractions, or configurability. Do not introduce breaking changes to existing interfaces, APIs, user-visible behaviors, or downstream dependencies without explicit discussion and provision of migration guidance.
+**Rule:** *Choose the mode by what you are producing: one-off answers and tests get the smallest viable change; re-usable product code gets restructured until the request fits cleanly.*
+
+**Smallest-change mode** (testing, answering questions, scratch/experimental scripts, one-off runs): make only the minimal change necessary to fulfill the stated requirement. Strictly match the existing code style, structure, and conventions. Do not refactor unrelated code or add speculative features, abstractions, or configurability. Do not introduce breaking changes to existing interfaces, APIs, user-visible behaviors, or downstream dependencies without explicit discussion and provision of migration guidance.
+
+**Restructure mode** (re-usable product code — pipeline scripts, jobs, shared artifacts, live docs): when a request no longer fits the current structure, change the structure — rename, merge, split, delete — so the request becomes a natural piece of one coherent whole: one concept, one name, one number, uniform across every layer. Never satisfy a product-code request by adding conditions, knobs, columns, or "was X" notes on top of a structure that should have been reshaped. The latest instruction wins fully; live docs show only the current state; history lives in the archive.
+
+**Gate:** before implementing, decide which mode applies. When in doubt, suggest a plan and ask the user.
 
 ## 5. Verifiable Goals Over Vague Intent
 
@@ -93,7 +90,25 @@ Maintain a lightweight file named `TROUBLESHOOTING.md` in the project root. This
 Bugs rarely originate from a simple script error; they are usually symptoms of an underlying design flaw. Identify the root cause before patching the symptom. The correct fix should make the codebase simpler and more elegant, not bloated and fragile. If both a quick patch and a structural redesign are viable, present both paths to the user. Never default to a patch without offering the architectural alternative. Ultimately, never attempt to resolve an exception locally within a block of code. Exceptions are the downstream results of unclear definitions—think, design, and define before you code.
 
 
+## 13. The Data Artifact Is the Contract
 
+Thinking principles in data handling: data artifact is the contract. Between any two steps, there must be a file on disk that you can open, inspect, and explain. If you cannot describe its exact shape and contents, the next step is built on an assumption — stop and inspect. A pipeline is not a script; it is a chain of artifacts, each one verifying the step before it.
+
+## 14. Default to Checking, Not Doing
+
+Verify every claim against evidence, and confirm every non-trivial decision with the user before acting. Never let your own momentum substitute for their judgment. You are a colleague whose job is to propose and verify; the user owns the decisions.
+
+## 15. MUST ASK Before Every Step
+
+The LLM must not assume it already knows the inputs to a pipeline step and conduct it directly. Before executing or planning **any** step, it must present its assumptions and obtain explicit user confirmation via the `question` tool, then **wait** for the answer. It must never auto-proceed, regardless of how confident it appears.
+
+- Ask the **universal gate** questions before every step, and the **per-step** questions at the top of the relevant `pipeline.md` section.
+- A step runs only after the user answers the gate; a "yes" applies only to the immediately-prior question, never combined with others.
+- If a question's answer is discoverable from an existing artifact (rule #13), state what you found and confirm it — do not silently assume.
+- This mirrors the §9a two-party validation pattern: AI proposes and verifies, the user confirms and owns the decision.
+
+## 15. Anti-Spaghetti
+When writing or modifying code, strictly avoid 'band-aid' special-casing and deep if-else chains. Follow these architectural rules. If a new requirement requires an awkward if statement, it means the current abstraction is wrong. If your coding is abundant with hard-code adding special-casing data to the default data table, it means the data structure is wrong. Suggest to refactor the underlying abstraction and structure to naturally accommodate the new case first, rather then add the feature. Always be elegant and clean.
 
 ---
 
